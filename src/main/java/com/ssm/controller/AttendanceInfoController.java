@@ -20,6 +20,7 @@ public class AttendanceInfoController {
     public String addAttendancement(AttendanceInfo attendanceInfo){
         System.out.println(attendanceInfo);
         Integer count=attendanceService.addAttendance(attendanceInfo);
+        System.out.println("attendanceService.addAttendance返回:"+count);
         if(count>0){
             return "{\"message\":\"true\"}";
         }else{

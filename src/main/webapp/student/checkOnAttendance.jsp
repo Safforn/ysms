@@ -83,6 +83,13 @@
                                </div>
                            </div>
                             <div class="form-group">
+                                <label class="col-sm-3 control-label">学号:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" value="${ATTENDANCE.sno}" readonly="true"
+                                           id="sno" name="sno"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称:</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" value="${ATTENDANCE.cname}"
@@ -122,6 +129,7 @@
             (now.getHours()<10?"0":"")+now.getHours()+
             (now.getMinutes()<10?"0":"")+now.getMinutes()+
             (now.getSeconds()<10?"0":"")+now.getSeconds();
+        var sno = (session.getAttribute("STUDENT")).getSno();
         var cname=$('#cname').val();
         $.ajax({
            url:'/ysms/attendance/addAttendancement',
@@ -130,12 +138,13 @@
             cache:false,
             data:{
                 aid:aid,
+                sno:sno,
                 cname:cname,
                 time:time          //将当前时间作为考勤时间(年-月-日)
             },
             dataType:'json',
             success:function (data) {
-               if (data.success=='true'){
+               if (data.message=='true'){
                    swal({
                        title:'系统提示',
                        text:'考勤成功',
