@@ -1,9 +1,6 @@
 package com.ssm.controller;
 
-import com.ssm.pojo.DepartmentInfo;
-import com.ssm.pojo.DormInfo;
-import com.ssm.pojo.Pager;
-import com.ssm.pojo.StudentInfo;
+import com.ssm.pojo.*;
 import com.ssm.service.DepartmentInfoService;
 import com.ssm.service.DormInfoService;
 import com.ssm.service.StudentInfoService;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -155,6 +153,23 @@ public class StudentInfoController {
         }else{
             return "{\"success\":\"false\"}";
         }
+    }
+
+    //动态加载院系类别列表
+    @RequestMapping(value = "/getStudent",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Map<String,Object> getStudent(HttpServletResponse res, HttpServletRequest req)throws Exception{
+        //获取类别
+        List<StudentInfo> studentInfos=studentInfoService.getAllStudent();
+        int count=0;
+        if(studentInfos!=null&&studentInfos.size()>0){
+            count=studentInfos.size();
+        }
+        //创建对象result,保存返回结果
+        Map<String,Object> result=new HashMap<>(2);
+        result.put("count",count);
+        result.put("StudentType",studentInfos);
+        return result;
     }
 
     //查看各个院系的学神分配情况

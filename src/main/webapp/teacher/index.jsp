@@ -10,7 +10,7 @@
 <%@ page isELIgnored="false" %>
 <%
     //防止直接进入后台
-    if(session.getAttribute("ADMIN")==null){
+    if(session.getAttribute("TEACHER")==null){
         response.sendRedirect("/ssm_test/login.jsp");
     }
 //    System.out.println(session.getAttribute("ADMIN"));

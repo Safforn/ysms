@@ -4,6 +4,7 @@ import com.ssm.dao.CourseInfoDao;
 import com.ssm.dao.DepartmentInfoDao;
 import com.ssm.dao.StudentInfoDao;
 import com.ssm.pojo.CourseInfo;
+import com.ssm.pojo.DepartmentInfo;
 import com.ssm.pojo.Pager;
 import com.ssm.pojo.StudentInfo;
 import com.ssm.service.CourseInfoService;
@@ -65,6 +66,11 @@ public class CourseInfoServiceImpl implements CourseInfoService {
         }
         //分页获取学生信息
         return courseInfoDao.selectByPage(params);
+    }
+
+    @Override
+    public List<CourseInfo> getAll() {
+        return courseInfoDao.getAllCourse();
     }
 
 

@@ -58,9 +58,9 @@ public class TeacherInfoController {
     @RequestMapping(value = "/login",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String login(TeacherInfo tch, HttpServletRequest req){
-//        System.out.println(stu);
+        System.out.println(tch.toString());
         TeacherInfo teacherInfo=teacherInfoService.login(tch);
-//        System.out.println(teacherInfo);
+        System.out.println(teacherInfo.toString());
         if(teacherInfo!=null){
             req.getSession().setAttribute("TEACHER",teacherInfo);
             return "{\"success\":\"true\"}";

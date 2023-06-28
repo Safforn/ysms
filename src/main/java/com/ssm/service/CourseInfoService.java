@@ -18,5 +18,7 @@ public interface CourseInfoService {
     int updateCourse(CourseInfo courseInfo);
     //获取满足条件的学生列表
     List<CourseInfo> findCourseInfo(CourseInfo courseInfo, Pager pager);
+    //获取全部课程信息
+    List<CourseInfo> getAll();
 
 }

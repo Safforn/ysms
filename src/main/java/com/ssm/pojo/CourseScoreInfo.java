@@ -2,8 +2,8 @@ package com.ssm.pojo;
 
 public class CourseScoreInfo {
     private String sid;  // 成绩编号
-    private String sno;  // 学号
-    private String cid;  // 课程编号
+    private StudentInfo studentInfo;  // 学号
+    private CourseInfo courseInfo;  // 课程编号
     private String credit;  // 学分
     private String score;  // 成绩 得分
 
@@ -13,14 +13,6 @@ public class CourseScoreInfo {
 
     public void setSid(String sid) {
         this.sid = sid;
-    }
-
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
     }
 
     public String getCredit() {
@@ -39,20 +31,28 @@ public class CourseScoreInfo {
         this.score = score;
     }
 
-    public String getSno() {
-        return sno;
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
     }
 
-    public void setSno(String sno) {
-        this.sno = sno;
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.studentInfo = studentInfo;
+    }
+
+    public CourseInfo getCourseInfo() {
+        return courseInfo;
+    }
+
+    public void setCourseInfo(CourseInfo courseInfo) {
+        this.courseInfo = courseInfo;
     }
 
     @Override
     public String toString() {
-        return "AnnounceInfo{" +
+        return "CourseScoreInfo{" +
                 "sid='" + sid + '\'' +
-                ", sno='" + sno + '\'' +
-                ", cid='" + cid + '\'' +
+                ", studentInfo='" + studentInfo + '\'' +
+                ", courseInfo='" + courseInfo + '\'' +
                 ", credit='" + credit + '\'' +
                 ", score='" + score + '\'' +
                 '}';

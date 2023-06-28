@@ -108,7 +108,7 @@
                         <a class="J_menuItem" href="askForLeave.jsp">请假</a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="viewScore.jsp">查看成绩</a>
+                        <a class="J_menuItem" href="viewCourseScore.jsp">查看成绩</a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="viewCourse.jsp">查看课程安排</a>

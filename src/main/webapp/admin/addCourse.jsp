@@ -48,14 +48,6 @@
     <!-- Sweet Alert -->
     <script src="../commons/jslib/hplus/js/plugins/iCheck/icheck.min.js"></script>
     <script src="../commons/jslib/CommonValue.js"></script>
-
-
-    <%--    <script--%>
-    <%--            src="/ssm_test/commons/jslib/hplus/js/plugins/bootstrap-table/bootstrap-table.min.js"--%>
-    <%--            type="text/javascript"></script>--%>
-    <%--    <script--%>
-    <%--            src="/ssm_test/commons/jslib/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"--%>
-    <%--            type="text/javascript"></script>--%>
     <script src="../commons/jslib/hplus/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
     <!--数据导出相关-->
     <script src="../commons/tableExport.jquery.plugin/tableExport.js"></script>

@@ -201,4 +201,28 @@ public interface StudentInfoDao {
     //修改密码
     @Update("update student set password=#{password} where sno=#{sno}")
     int changePassword(StudentInfo studentInfo);
+
+    //根据学号查学生
+    @Results({@Result(id = true,column = "sno",property = "sno"),
+            @Result(column = "sname",property = "sname"),
+            @Result(column = "password",property = "password"),
+            @Result(column = "sex",property = "sex"),
+            @Result(column = "phone",property = "phone"),
+            @Result(column = "email",property = "email"),
+            @Result(column = "address",property ="address"),
+            @Result(column = "acquireStatus",property = "acquireStatus"),
+            @Result(column = "checkStatus",property = "checkStatus"),
+            @Result(column = "checkTime",property = "checkTime"),
+            @Result(column = "dorm_id",property = "dormInfo",
+                    one=@One(select = "com.ssm.dao.DormInfoDao.selectById", fetchType = FetchType.EAGER)),
+            @Result(column = "idcard",property = "idcard"),
+            @Result(column = "dep_id",property ="departmentInfo",
+                    one = @One(select = "com.ssm.dao.DepartmentInfoDao.selectById", fetchType = FetchType.EAGER))
+    })
+    @Select("select * from student where sno=#{sno}")
+    List<StudentInfo> selectById(@Param("sno") String sno);
+
+
+
+
 }

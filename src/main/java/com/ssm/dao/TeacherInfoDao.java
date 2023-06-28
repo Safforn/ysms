@@ -24,7 +24,7 @@ public interface TeacherInfoDao {
             @Result(column = "idcard",property = "idcard"),
     })
     @Select("select * from teacher where tno=#{tno} and password=#{password}")
-    TeacherInfo login(TeacherInfo stu);
+    TeacherInfo login(TeacherInfo tch);
 
 
     //根据条件查询学生总数

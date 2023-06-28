@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,6 +103,26 @@ public class CourseInfoController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    //动态加载院系类别列表
+    @RequestMapping(value = "/getCourse",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Map<String,Object> getCourse(HttpServletResponse res, HttpServletRequest req)throws Exception{
+        //获取类别
+        List<CourseInfo> courseInfos=courseInfoService.getAll();
+//        for(CourseInfo courseInfo:courseInfos){
+//            System.out.println(courseInfo);
+//        }
+        int count=0;
+        if(courseInfos!=null&&courseInfos.size()>0){
+            count=courseInfos.size();
+        }
+        //创建对象result,保存返回结果
+        Map<String,Object> result=new HashMap<>(2);
+        result.put("count",count);
+        result.put("CourseType",courseInfos);
+        return result;
     }
 
 }
