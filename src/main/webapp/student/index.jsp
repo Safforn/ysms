@@ -110,6 +110,10 @@
                     <li>
                         <a class="J_menuItem" href="viewScore.jsp">查看成绩</a>
                     </li>
+                    <li>
+                        <a class="J_menuItem" href="viewCourse.jsp">查看课程安排</a>
+                    </li>
+
                 </ul>
             </li>
 

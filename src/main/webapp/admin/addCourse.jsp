@@ -299,6 +299,7 @@
         loadTeacherId("/ysms/teacher/getTno","tno_add");
         loadTeacherId('/ysms/teacher/getTno',"tno_up");
 
+        //表单校验（如必填项、长度限制等）
         vform('addform',addCourse);
         vform('updateform',updateCourse);
 

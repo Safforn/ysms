@@ -11,43 +11,43 @@
 <head>
     <title>宿舍分配</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="../commons/jslib/hplus/css/bootstrap.min.css"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/bootstrap.min.css"
           rel="stylesheet">
-    <link href="../commons/jslib/hplus/css/font-awesome.min.css?v=4.4.0"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/font-awesome.min.css?v=4.4.0"
           rel="stylesheet">
-    <link href="../commons/jslib/hplus/css/animate.min.css"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/animate.min.css"
           rel="stylesheet">
-    <link href="../commons/jslib/hplus/css/style.min.css?v=4.0.0"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/style.min.css?v=4.0.0"
           rel="stylesheet">
-    <link href="../commons/jslib/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/plugins/bootstrap-table/bootstrap-table.min.css"
           rel="stylesheet">
 
     <!-- Sweet Alert -->
-    <link href="../commons/jslib/hplus/css/plugins/sweetalert/sweetalert.css"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/plugins/sweetalert/sweetalert.css"
           rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="../commons/css/qy-style.css" rel="stylesheet">
+    <link href="Desktop/ysms/src/main/webapp/commons/css/qy-style.css" rel="stylesheet">
 
-    <link href="../commons/jslib/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+    <link href="Desktop/ysms/src/main/webapp/commons/jslib/hplus/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
           rel="stylesheet">
-    <script src="../commons/jslib/hplus/js/jquery.min.js?v=2.1.4"></script>
-    <script src="../commons/jslib/hplus/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/jquery.min.js?v=2.1.4"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/jquery-ui-1.10.4.min.js"></script>
     <script
-            src="../commons/jslib/hplus/js/plugins/validate/jquery.validate.min.js"></script>
+            src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/validate/jquery.validate.min.js"></script>
     <script
-            src="../commons/jslib/hplus/js/plugins/validate/messages_zh.min.js"></script>
+            src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/validate/messages_zh.min.js"></script>
 
-    <script type="text/javascript" src="../commons/jslib/jquery-form.js"></script>
+    <script type="text/javascript" src="Desktop/ysms/src/main/webapp/commons/jslib/jquery-form.js"></script>
 
-    <script src="../commons/jslib/hplus/js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="../commons/jslib/hplus/js/content.min.js?v=1.0.0"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/content.min.js?v=1.0.0"></script>
 
     <!-- Sweet Alert -->
     <script type="text/javascript"
-            src="../commons/jslib/hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
+            src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/sweetalert/sweetalert.min.js"></script>
     <!-- Sweet Alert -->
-    <script src="../commons/jslib/hplus/js/plugins/iCheck/icheck.min.js"></script>
-    <script src="../commons/jslib/CommonValue.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/CommonValue.js"></script>
 
 
     <%--    <script--%>
@@ -56,17 +56,17 @@
     <%--    <script--%>
     <%--            src="/ssm_test/commons/jslib/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"--%>
     <%--            type="text/javascript"></script>--%>
-    <script src="../commons/jslib/hplus/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
     <!--数据导出相关-->
-    <script src="../commons/tableExport.jquery.plugin/tableExport.js"></script>
-    <script src="../commons/tableExport.jquery.plugin/libs/FileSaver/FileSaver.min.js"></script>
-    <script src="../commons/tableExport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
-    <script src="../commons/tableExport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
-    <script src="../commons/tableExport.jquery.plugin/libs/js-xlsx/xlsx.core.min.js"></script>
-    <script src="../commons/jslib/hplus/js/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
-    <script src="../commons/jslib/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"
+    <script src="Desktop/ysms/src/main/webapp/commons/tableExport.jquery.plugin/tableExport.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/tableExport.jquery.plugin/libs/FileSaver/FileSaver.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/tableExport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/tableExport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/tableExport.jquery.plugin/libs/js-xlsx/xlsx.core.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"
             type="text/javascript"></script>
-    <script src="../commons/jslib/hplus/js/plugins/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="Desktop/ysms/src/main/webapp/commons/jslib/hplus/js/plugins/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js"></script>
 </head>
 <body class="gray-bg black-bg-gmtx">
     <div class="wrapper wrapper-content">

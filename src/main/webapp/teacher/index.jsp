@@ -22,10 +22,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>管理员主界面</title>
+    <title>教师主界面</title>
 
-    <meta name="keywords" content="管理员">
-    <meta name="description" content="管理员">
+    <meta name="keywords" content="教师">
+    <meta name="description" content="教师">
 
     <!--[if lt IE 8]>
     <meta http-equiv="refresh" content="0;ie.html" />
@@ -44,91 +44,7 @@
           href="../commons/jslib/hplus/css/plugins/sweetalert/sweetalert.css"
           type="text/css">
     <link href="../commons/css/qy-style.css" rel="stylesheet">
-    <%--  <style>
-          .page-tabs-jj a.active {
-             /* background: #EE4000;*/
-              color: #fff
-          }
 
-          .page-tabs-jj a.active i:hover,.page-tabs a.active:hover {
-              /*background: #FF8C00;*/
-              color: #fff
-          }
-
-          #accordion .panel {
-              border: none;
-              box-shadow: none;
-              border-radius: 0;
-              margin-bottom: -5px;
-          }
-
-          #accordion .panel-heading {
-              padding: 0;
-              border-radius: 0;
-              border: none;
-              text-align: center;
-          }
-
-          #accordion .panel-title a {
-              display: block;
-              padding: 25px 30px;
-              font-size: 16px;
-              font-weight: bold;
-              color: #fff;
-              background: #212b34;
-              border-bottom: 1px solid #2F4050;
-              position: relative;
-              transition: all 0.5s ease 0s;
-          }
-
-          #accordion .panel-title a:hover {
-              background: #19222a;
-          }
-
-          #accordion .panel-title a:after,#accordion .panel-title a.collapsed:after
-          {
-              content: "\f067";
-              font-family: FontAwesome;
-              font-size: 15px;
-              font-weight: 200;
-              position: absolute;
-              top: 25px;
-              left: 15px;
-              transform: rotate(135deg);
-              transition: all 0.5s ease 0s;
-          }
-
-          #accordion .panel-title a.collapsed:after {
-              transform: rotate(0deg);
-          }
-
-          #accordion .panel-body {
-              background: #293846;
-              padding: 0 0 0 0px;
-              border: none;
-              position: relative;
-          }
-
-          #accordion .panel-body p {
-              font-size: 14px;
-              color: #fff;
-              line-height: 25px;
-              background: #3296b7;
-              padding: 30px;
-              margin: 0;
-          }
-
-          #accordion .panel-collapse .panel-body p {
-              opacity: 0;
-              transform: scale(0.9);
-              transition: all 0.5s ease-in-out 0s;
-          }
-
-          #accordion .panel-collapse.in .panel-body p {
-              opacity: 1;
-              transform: scale(1);
-          }
-      </style>--%>
 </head>
 <body class="fixed-sidebar full-height-layout white-bg black-bg-gmtx" style="overflow:hidden">
 <!--左侧导航开始-->
@@ -144,42 +60,22 @@
                                width="50%"/></span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">${ADMIN.adminName}</strong></span>
-                                <span class="text-muted text-xs block">教务管理员<b class="caret"></b></span>
+                               <span class="block m-t-xs"><strong class="font-bold">${TEACHER.tname}</strong></span>
+                                <span class="text-muted text-xs block">教师<b class="caret"></b></span>
                                 </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-<%--                        <li>--%>
-<%--                            <a data-toggle="modal" data-keyboard="true"--%>
-<%--                               data-backdrop="true" id="btn_ResetPsw"><b>修改密码</b>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
                         <li>
-                            <a href="/ysms/admin/loginOut"><b>安全退出</b>
-                            </a>
+                            <a href="/ysms/teacher/loginOut"><b>安全退出</b></a>
                         </li>
                     </ul>
                 </div>
                 <br/><br/>
-<%--                <div class="logo-element">--%>
-<%--                    --%>
-<%--                </div>--%>
             </li>
 
             <li>
-                <a href="#">
-                    <i class="fa fa-check"></i>
-                    <span class="nav-label">学生管理</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="addStudent.jsp">新生信息录入</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">宿舍管理</span> <span class="fa arrow"></span>
+                <a href="#"> <i class="fa fa-check"></i>
+                    <span class="nav-label">宿舍管理</span> <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -190,12 +86,14 @@
             </li>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">课程管理</span><span class="fa arrow"></span>
+                        class="nav-label">课程与成绩管理</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem"
-                           href="addCourse.jsp">课程安排</a>
+                        <a class="J_menuItem" href="viewCourse.jsp">查看课程安排</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="addCourseScore.jsp">成绩管理</a>
                     </li>
                 </ul>
             </li>
@@ -207,10 +105,6 @@
                     <li>
                         <a class="J_menuItem"
                            href="viewAnnouncement.jsp">查看公告</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem"
-                           href="addAnnouncement.jsp">添加公告</a>
                     </li>
                 </ul>
             </li>

@@ -26,6 +26,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
     TeacherInfoDao teacherInfoDao;
     @Autowired
     DepartmentInfoDao departmentInfoDao;
+
     @Override
     public TeacherInfo login(TeacherInfo tch) {
         return teacherInfoDao.login(tch);

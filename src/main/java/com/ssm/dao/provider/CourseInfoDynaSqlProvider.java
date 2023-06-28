@@ -60,7 +60,7 @@ public class CourseInfoDynaSqlProvider {
                     if(courseInfo.getLocation()!=null&&!"".equals(courseInfo.getLocation())&&!"请选择".equals(courseInfo.getLocation())){
                         WHERE("location=#{courseInfo.location}");
                     }
-                    if(courseInfo.getAllNumber().equals("0")&&!"".equals(courseInfo.getAllNumber())){
+                    if(courseInfo.getAllNumber()!=null&&!"".equals(courseInfo.getAllNumber())){
                         WHERE("allNumber=#{courseInfo.allNumber}");
                     }
                     if(courseInfo.getTeacherInfo()!=null&&!"".equals(courseInfo.getTeacherInfo().getTno())&&!"0".equals(courseInfo.getTeacherInfo().getTno())){
@@ -90,7 +90,7 @@ public class CourseInfoDynaSqlProvider {
                 if(courseInfo.getLocation()!=null&&!"".equals(courseInfo.getLocation())&&!"请选择".equals(courseInfo.getLocation())){
                     SET("location=#{location}");
                 }
-                if(courseInfo.getAllNumber().equals("0")&&!"".equals(courseInfo.getAllNumber())){
+                if(courseInfo.getAllNumber()!=null&&!"".equals(courseInfo.getAllNumber())){
                     SET("allNumber=#{allNumber}");
                 }
                 if(courseInfo.getTeacherInfo()!=null&&!"0".equals(courseInfo.getTeacherInfo().getTno())&&!"".equals(courseInfo.getTeacherInfo().getTno())){

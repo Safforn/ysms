@@ -169,28 +169,29 @@
             <li>
                 <a href="#">
                     <i class="fa fa-check"></i>
-                    <span class="nav-label">学生管理</span><span class="fa arrow"></span>
+                    <span class="nav-label">用户管理</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="addStudent.jsp">新生信息录入</a>
+                        <a class="J_menuItem" href="addStudent.jsp">学生信息录入</a>
                     </li>
                 </ul>
             </li>
+<%--            教师的职能--%>
+<%--            <li>--%>
+<%--                <a href="#"> <i class="fa fa-check"></i> <span--%>
+<%--                        class="nav-label">宿舍管理</span> <span class="fa arrow"></span>--%>
+<%--                </a>--%>
+<%--                <ul class="nav nav-second-level">--%>
+<%--                    <li>--%>
+<%--                        <a class="J_menuItem"--%>
+<%--                           href="Desktop/ysms/src/main/webapp/teacher/dormAllocation.jsp">宿舍分配</a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">宿舍管理</span> <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem"
-                           href="dormAllocation.jsp">宿舍分配</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">课程管理</span><span class="fa arrow"></span>
+                        class="nav-label">课程管理622</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -201,7 +202,7 @@
             </li>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">公告管理</span><span class="fa arrow"></span>
+                        class="nav-label">公告管理612</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -216,7 +217,7 @@
             </li>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">个人账户管理</span><span class="fa arrow"></span>
+                        class="nav-label">个人账户管理602</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -225,6 +226,7 @@
                     </li>
                 </ul>
             </li>
+<%--            可以新增加的功能：图表统计  --%>
 <%--            <li>--%>
 <%--                <a href="#">--%>
 <%--                    <i class="fa fa-check"></i>--%>

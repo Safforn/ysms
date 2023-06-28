@@ -62,7 +62,7 @@ public class TeacherInfoController {
         TeacherInfo teacherInfo=teacherInfoService.login(tch);
 //        System.out.println(teacherInfo);
         if(teacherInfo!=null){
-            req.getSession().setAttribute("STUDENT",teacherInfo);
+            req.getSession().setAttribute("TEACHER",teacherInfo);
             return "{\"success\":\"true\"}";
         }else{
             return "{\"success\":\"false\"}";
@@ -150,7 +150,7 @@ public class TeacherInfoController {
     //退出登录
     @RequestMapping(value = "/loginOut",method = {RequestMethod.GET,RequestMethod.POST})
     public String loginOut(HttpServletRequest req){
-        req.getSession().invalidate();//清除session对象中的所有信息
+        req.getSession().invalidate();  //清除session对象中的所有信息
         return "redirect:/login.jsp";
     }
 
