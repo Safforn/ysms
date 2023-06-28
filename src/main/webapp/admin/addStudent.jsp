@@ -331,7 +331,7 @@
         loadDepartmentType("/ysms/department/getDepartment","dep_id_up");
         //加载宿舍分配编号
         loadDormId("/ysms/dorm/getDormId","dorm_id");
-        loadDormId('/ysms/dorm/getDormId',"dorm_id_up")
+        loadDormId('/ysms/dorm/getDormId',"dorm_id_up");
 
         vform('addform',addStudent);
         vform('updateform',updateStudent);
@@ -367,7 +367,7 @@
                     acquireStatus:$('#acquireStatus option:selected').val(),
                     checkStatus:$('#checkStatus option:selected').val(),
                     "dormInfo.id":$('#dorm_id option:selected').val(),
-                     "departmentInfo.id":parseInt($('#dep_id option:selected').val())
+                    "departmentInfo.id":parseInt($('#dep_id option:selected').val())
                 };
                 return param;
             },

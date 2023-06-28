@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>课程信息管理</title>
+    <title>请假信息管理</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link href="../commons/jslib/hplus/css/bootstrap.min.css"
           rel="stylesheet">
@@ -73,31 +73,43 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div class="row">
-                    <label class="col-sm-1 control-label text-right">课程编号</label>
+                    <label class="col-sm-1 control-label text-right">学号</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control input-sm" id="cid" name="cid" placeholder="课程编号"/>
+                        <input type="text" class="form-control input-sm" id="sno" name="sno" placeholder="学号"/>
                     </div>
-                    <label class="col-sm-1 control-label text-right">课程名称</label>
+                    <label class="col-sm-1 control-label text-right">姓名</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control input-sm" id="cname" name="cname" placeholder="课程名称"/>
+                        <input type="text" class="form-control input-sm" id="sname" name="sname" placeholder="姓名"/>
                     </div>
-                    <label class="col-sm-1 control-label text-right">上课时间</label>
+                    <label class="col-sm-1 control-label text-right">性别</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control input-sm" id="time" name="time" placeholder="上课时间"/>
+                        <select class="form-control" name="sex" id="sex">
+                            <option value="请选择" selected>请选择</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="col-sm-1 control-label text-right">上课地点</label>
+                    <label class="col-sm-1 control-label text-right">领取物品</label>
+                   <div class="col-sm-2">
+                       <select class="form-control" name="acquireStatus" id="acquireStatus">
+                           <option value="请选择" selected>请选择</option>
+                           <option value="未领取">未领取</option>
+                           <option value="已领取">已领取</option>
+                       </select>
+                   </div>
+                    <label class="col-sm-1 control-label text-right">是否报到</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control input-sm" id="location" name="location" placeholder="上课地点"/>
+                        <select class="form-control" name="checkStatus" id="checkStatus">
+                            <option value="请选择" selected>请选择</option>
+                            <option value="未报到">未报到</option>
+                            <option value="已报到">已报到</option>
+                        </select>
                     </div>
-                    <label class="col-sm-1 control-label text-right">课程容量</label>
+                    <label class="col-sm-1 control-label text-right">宿舍分配编号</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control input-sm" id="allNumber" name="allNumber" placeholder="课程容量"/>
-                    </div>
-                    <label class="col-sm-1 control-label text-right">教师姓名</label>
-                    <div class="col-sm-2">
-                        <select class="form-control" name="teacherInfo.tno" id="tno"><!--动态加载-->
+                        <select class="form-control" name="dormInfo.id" id="dorm_id"><!--动态加载-->
                         </select>
                     </div>
                 </div>
@@ -115,7 +127,7 @@
                     </div>
                     <div class="col-sm-2">
                         <button class="btn btn-w-m btn-primary glyphicon glyphicon-plus" data-toggle="modal"
-                                href="#addCourse" data-keyboard="true" data-backdrop="false"
+                                href="#addAskForLeave" data-keyboard="true" data-backdrop="false"
                                 id="btn_add">新增</button>
                     </div>
                     <div class="col-sm-2">
@@ -125,15 +137,14 @@
                     </div>
                     <div class="col-sm-2">
                         <button class="btn btn-w-m btn-primary glyphicon glyphicon-remove" id="btn_del"
-                                onclick="deleteCourse()">删除</button>
+                                onclick="deleteAskForLeave()">删除</button>
                     </div>
                     <div class="col-sm-2">
-                        <button class="btn btn-w-m btn-primary glyphicon glyphicon-erase"
-                                onclick="javascript:btn_clear()">清空</button>
+                        <button class="btn btn-w-m btn-primary glyphicon glyphicon-erase" onclick="javascript:btn_clear()">清空</button>
                     </div>
                 </div>
             </div>
-            <%--学生列表展示--%>
+            <%--请假信息列表展示--%>
             <div class="ibox-content table-responsive">
                 <table id="table" class="table" data-click-to-select="true">
                 </table>
@@ -141,7 +152,7 @@
         </div>
     </div>
     <!--添加-->
-    <div class="modal fade" id="addCourse">
+    <div class="modal fade" id="addAskForLeave">
         <div class="modal-dialog" style="width:400px">
             <div class="modal-content">
                 <div class="modal-header">
@@ -149,53 +160,38 @@
                             aria-hidden="true" onclick="clear_add()" id="btn_close_add">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="addCourseLabel">课程信息录入</h4>
+                    <h4 class="modal-title" id="addAskForLeavelable">请假信息信息录入</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <form method="post" class="form-horizontal" id="addform">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">课程编号</label>
+                                <label class="col-sm-3 control-label">学号</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control" name="cid" id="cid_add"/>
+                                    <input type="text" value="" class="form-control" name="sno"
+                                           id="sno_add"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">课程名称</label>
+                                <label class="col-sm-3 control-label">姓名</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control" name="cname" id="cname_add">
+                                    <input type="text" value="" class="form-control" name="sname" id="sname_add">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">上课时间</label>
+                                <label class="col-sm-3 control-label">性别</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control" name="time" id="time_add">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">上课地点</label>
-                                <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control" name="location" id="location_add">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">课程容量</label>
-                                <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control" name="allNumber" id="allNumber_add">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">教师姓名</label>
-                                <div class="col-sm-8 controls">
-                                    <%-- TODO: 新增弹窗的选择下拉框，需要修改name属性 --%>
-                                    <select class="form-control" id="tno_add" name="teacherInfo.tno">
+                                    <select class="form-control" name="sex" id="sex_add">
+                                        <option value="">请选择</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">院系</label>
                                 <div class="col-sm-8 controls">
-                                    <select class="form-control" id="dep_id_add" name="departmentInfo.id">
+                                    <select class="form-control" id="dep_id_add" name="dormInfo.id">
                                     </select>
                                 </div>
                             </div>
@@ -211,7 +207,7 @@
         </div>
     </div>
     <!--修改-->
-    <div class="modal fade" id="updateCourse">
+    <div class="modal fade" id="updateAskForLeave">
         <div class="modal-dialog" style="width:400px">
             <div class="modal-content">
                 <div class="modal-header">
@@ -219,61 +215,100 @@
                             aria-hidden="true" onclick="clear_add()" id="btn_close_up">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="updateCourseLabel">课程信息修改</h4>
+                    <h4 class="modal-title" id="updateAskForLeaveLabel">请假信息信息修改</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <form method="post" class="form-horizontal" id="updateform">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">课程编号</label>
+                                <label class="col-sm-3 control-label">学号</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="cid" id="cid_up" readonly="true"/>
+                                    <input type="text" value="" class="form-control" name="sno"
+                                           id="sno_up" readonly="true"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">课程名称</label>
+                                <label class="col-sm-3 control-label">姓名</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="cname" id="cname_up"/>
+                                    <input type="text" value="" class="form-control" name="sname"
+                                           id="sname_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">上课时间</label>
+                                <label class="col-sm-3 control-label">性别</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="time" id="time_up"/>
+                                    <select class="form-control" name="sex" id="sex_up">
+                                        <option value="请选择">请选择</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">上课地点</label>
+                                <label class="col-sm-3 control-label">电话</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="location" id="location_up"/>
+                                    <input type="text" value="" class="form-control" name="phone"
+                                           id="phone_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">课程容量</label>
+                                <label class="col-sm-3 control-label">邮箱</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="allNumber" id="allNumber_up"/>
+                                    <input type="text" value="" class="form-control" name="email"
+                                           id="email_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">教师姓名</label>
+                                <label class="col-sm-3 control-label">住址</label>
                                 <div class="col-sm-8 controls">
-                                    <%-- TODO: 修改弹窗的选择下拉框，需要修改name属性 --%>
-                                    <select class="form-control"
-                                            id="tno_up" name="teacherInfo.tno" readonly="true">
+                                     <input type="text" value="" class="form-control" name="address"
+                                        id="address_up"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">是否领取物品</label>
+                                <div class="col-sm-8 controls">
+                                    <select class="form-control" name="acquireStatus" id="acquireStatus_up">
+                                        <option value="请选择" selected>请选择</option>
+                                        <option value="未领取">未领取</option>
+                                        <option value="已领取">已领取</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">是否报到</label>
+                                <div class="col-sm-8 controls">
+                                    <select class="form-control" name="checkStatus" id="checkStatus_up" readonly="true">
+                                        <option value="请选择" selected>请选择</option>
+                                        <option value="未报到">未报到</option>
+                                        <option value="已报到">已报到</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">报到时间</label>
+                                <div class="col-sm-8 controls">
+                                    <input class="form-control" name="checkTime" value="" id="checkTime_up" readonly="true"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">宿舍编号</label>
+                                <div class="col-sm-8 controls">
+                                    <select class="form-control" name="dormInfo.id" id="dorm_id_up" disabled="true" ><!--动态加载-->
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">院系编号</label>
                                 <div class="col-sm-8 controls">
-                                    <select class="form-control"
-                                            id="dep_id_up" name="departmentInfo.id" readonly="true">
+                                    <select class="form-control" id="dep_id_up" name="dormInfo.id" readonly="true">
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">身份证号</label>
+                                <div class="col-sm-8 controls">
+                                    <input type="text" class="form-control" value="" name="idcard" id="idcard_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -294,17 +329,16 @@
         //加载添加对话框界面院系下拉框
         loadDepartmentType("/ysms/department/getDepartment","dep_id_add");
         loadDepartmentType("/ysms/department/getDepartment","dep_id_up");
-        //加载根页面教室姓名的下拉框
-        loadTeacherId("/ysms/teacher/getTno","tno");
-        loadTeacherId("/ysms/teacher/getTno","tno_add");
-        loadTeacherId('/ysms/teacher/getTno',"tno_up");
+        //加载宿舍分配编号
+        loadDormId("/ysms/dorm/getDormId","dorm_id");
+        loadDormId('/ysms/dorm/getDormId',"dorm_id_up");
 
-        vform('addform',addCourse);
-        vform('updateform',updateCourse);
+        vform('addform',addAskForLeave);
+        vform('updateform',updateAskForLeave);
 
         var $table=$('#table');
         $table.bootstrapTable({
-            url:'/ysms/course/list',
+            url:'/ysms/askForLeave/list',
             toolbar:'#toolbar',
             dataType:'json',    //服务器返回的数据类型
             method:'post',      //请求方式
@@ -327,44 +361,44 @@
                 var param={
                     page:params.pageNumber,     //首页页码
                     rows:params.pageSize,       //每页的记录数
-                    cid:$('#cid').val(),
-                    cname:$('#cname').val(),
-                    time:$('#time').val(),
-                    location:$('#location').val(),
-                    allNumber:$('#allNumber').val(),
-                    "teacherInfo.tno":$('#tno option:selected').val(),
-                    "departmentInfo.id":parseInt($('#dep_id option:selected').val())
+                    sno:$('#sno').val(),
+                    sname:$('#sname').val(),
+                    sex:$('#sex option:selected').val(),
+                    acquireStatus:$('#acquireStatus option:selected').val(),
+                    checkStatus:$('#checkStatus option:selected').val(),
+                    "dormInfo.id":$('#dorm_id option:selected').val(),
+                     "departmentInfo.id":parseInt($('#dep_id option:selected').val())
                 };
                 return param;
             },
             columns:[{
                 checkbox:true
             },{
-                title:'课程编号',
-                field:'cid',
+                title:'学号',
+                field:'sno',
                 valign:'middle'
             },{
-                title:'课程名称',
-                field:'cname',
+                title:'姓名',
+                field:'sname',
                 valign:'middle'
             },{
-                title:'上课时间',
-                field:'time',
+                title:'性别',
+                field:'sex',
                 valign:'middle'
             },{
-                title:'上课地点',
-                field:'location',
+                title:'已领物品',
+                field:'acquireStatus',
                 valign:'middle'
             },{
-                title:'课程容量',
-                field:'allNumber',
+                title:'是否报到',
+                field:'checkStatus',
                 valign:'middle'
             },{
-                title:'教师姓名',
-                field:'teacherInfo',
+                title:'宿舍编号',
+                field:'dormInfo',
                 formatter:function (value,row,index) {
-                    if (row.teacherInfo){
-                        return row.teacherInfo.tno;
+                    if (row.dormInfo){
+                        return row.dormInfo.id;
                     }else{
                         return value;
                     }
@@ -385,39 +419,31 @@
     function search() {
         $('#table').bootstrapTable('refresh');
     }
-    //课程录入
-    function addCourse() {
-        var cid=$('#cid_add').val();
-        var cname=$('#cname_add').val();
-        var time=$('#time_add').val();
-        var location=$('#location_add').val();
-        var allNumber=$('#allNumber_add').val();
-        var tno=$('#tno_add option:selected').val();
+    //请假信息录入
+    function addAskForLeave() {
+        var sno=$('#sno_add').val();
+        var sname=$('#sname_add').val();
+        var sex=$('#sex_add option:selected').val();
         var dep_id=$('#dep_id_add option:selected').val();
         $.ajax({
-           url:'/ysms/course/addCourse',
+           url:'/ysms/askForLeave/addAskForLeave',
             dataType:'json',
             type:'post',
             data:{
-                cid:cid,
-                cname:cname,
-                time:time,
-                location:location,
-                allNumber:allNumber,
-                "teacherInfo.tno":parseInt(tno),
+                sno:sno,
+                sname:sname,
+                password:"111",  // 初始默认密码 111
+                sex:sex,
                 "departmentInfo.id":parseInt(dep_id)
             },
             success:function (data) {
                 if (data.success=='true'){
-                    $('#cid_add').val('');
-                    $('#cname_add').val('');
-                    $('#time_add').val('');
-                    $('#location_add').val('');
-                    $('#allNumber_add').val('');
-                    $('#tno_add').val('请选择')
-                    $('#dep_id_add').val('请选择');
-                    $('#addCourse').modal('hide');
-                    $('#table').bootstrapTable('refresh');
+                       $('#sno_add').val('');
+                       $('#sname_add').val('');
+                       $('#sex_add').val('请选择');
+                       $('#dep_id_add').val('请选择');
+                       $('#addAskForLeave').modal('hide');
+                       $('#table').bootstrapTable('refresh');
                 }else{
                     alert("添加失败!");
                 }
@@ -426,19 +452,19 @@
 
     }
     //删除
-    function deleteCourse() {
-        var cid='';
+    function deleteAskForLeave() {
+        var sno='';
         var selects=$('#table').bootstrapTable('getSelections');
         if(selects.length<=0){
-            swal('系统提示','请选择需要删除的课程!','warning');
+            swal('系统提示','请选择需要删除的请假信息!','warning');
             return;
         }
-        cid= "'"+selects[0].cid+"'";
+        sno= "'"+selects[0].sno+"'";
         for (var i=1;i<selects.length;i++){
-            cid+=","+"'"+selects[i].cid+"'";
+            sno+=","+"'"+selects[i].sno+"'";
         }
         swal({
-            title:"您确定要删除选中的课程吗?",
+            title:"您确定要删除选中的请假信息吗?",
             text:"",
             type:"warning",
             showCancelButton:true,
@@ -450,13 +476,13 @@
         },function (isconfirm) {
             if (isconfirm){
                 $.ajax({
-                    url:'/ysms/course/deleteCourse',
+                    url:'/ysms/askForLeave/deleteAskForLeave',
                     type:'post',
                     async: 'true',
                     cache:false,
                     contentType:"application/x-www-form-urlencoded; charset=utf-8",
                     data:{
-                        cid:cid
+                        sno:sno
                     },
                     dataType:'json',
                     success:function (data) {
@@ -484,30 +510,40 @@
             }
         });
     }
-    function updateCourse() {
+    function updateAskForLeave() {
         //获取表单上面的值
-        var cid=$('#cid_up').val();
-        var cname=$('#cname_up').val();
-        var time=$('#time_up').val();
-        var location=$('#phone_up').val();
-        var allNumber=$('#allNumber_up').val();
-        var tno=$('#tno_up option:selected').val();
+        var sno=$('#sno_up').val();
+        var sname=$('#sname_up').val();
+        var sex=$('#sex_up option:selected').val();
+        var phone=$('#phone_up').val();
+        var email=$('#email_up').val();
+        var address=$('#address_up').val();
+        var acquireStatus=$('#acquireStatus_up option:selected').val();
+        var checkStatus=$('#checkStatus_up option:selected').val();
+        var checkTime=$('#checkTime_up').val();
+        var dorm_id=$('#dorm_id_up option:selected').val();
+        var idcard=$('#idcard_up').val();
         var dep_id=$('#dep_id_up option:selected').val();
         // alert(sno+sname+sex+phone+email+address+acquireStatus+checkStatus+checkTime+dorm_id+idcard+dep_id);
         $.ajax({
-            url:'/ysms/course/updateCourse',
+            url:'/ysms/askForLeave/updateAskForLeave',
             type:'post',
             async:true,
             cache:false,
             dataType:'json',
             data:{
-                cid:cid,
-                cname:cname,
-                time:time,
-                location:location,
-                allNumber:allNumber,
-                "teacherInfo.tno":parseInt(tno),
-                "departmentInfo.id":parseInt(dep_id)
+              sno:sno,
+              sname:sname,
+              sex:sex,
+              phone:phone,
+              email:email,
+              address:address,
+              acquireStatus:acquireStatus,
+              checkStatus:checkStatus,
+              checkTime:checkTime,
+                "dormInfo.id":dorm_id,
+                idcard:idcard,
+              "departmentInfo.id":parseInt(dep_id)
             },
             success:function (data) {
                 if (data.success =='true' ){
@@ -516,60 +552,67 @@
                         text:'修改成功',
                         type:'success'
                     });
-                    $('#cid_up').val('');
-                    $('#cname_up').val('');
-                    $('#time_up').val('');
-                    $('#location_up').val('');
-                    $('#allNumber_up').val('');
-                    $('#tno_up').val('请选择')
-                    $('#dep_id_up').val('请选择');
-                    $('#updateCourse').modal('hide');
+                    $('#sno_up').val('');
+                    $('#sname_up').val('');
+                    $('#sex_up').val('请选择');
+                    $('#phone_up').val('');
+                    $('#email_up').val('');
+                    $('#address_up').val('');
+                    $('#acquireStatus_up').val('请选择');
+                    $('#checkStatus_up').val('请选择');
+                    $('#checkTime_up').val('');
+                    $('#dorm_id_up').val('0');
+                    $('#idcard_up').val('');
+                    $('#dep_id_up').val('0');
+                    $('#updateAskForLeave').modal('hide');
                     $('#table').bootstrapTable('refresh');
                 }else{
-                    alert("updateCourse进入success，但后端返回值为false");
+
                 }
             }
         });
 
     }
-    // 清空按钮 点击事件函数
     function btn_clear() {
-        $('#cid').val('');
-        $('#cname').val('');
-        $('#time').val('');
-        $('#location').val('');
-        $('#allNumber').val('');
-        $('#tno').val('0')
+        $('#sno').val('');
+        $('#sname').val('');
+        $('#sex').val('请选择');
+        $('#acquireStatus').val('请选择');
+        $('#checkStatus').val('请选择');
+        $('#dorm_id').val('0');
         $('#dep_id').val('0');
     }
-
-    // 修改课程弹窗的预先设置值
-    var cid_update='';
+    var sno_update='';
     function showUpdateModal() {
         var selects=$('#table').bootstrapTable('getSelections');
         if (selects.length<=0){
-            swal("系统提示","请选择要编辑的课程!",'warning');
+            swal("系统提示","请选择要编辑的商品!",'warning');
             return;
         }
         if (selects.length>1){
-            swal('系统提示','不能同时编辑多个课程','warning');
+            swal('系统提示','不能同时编辑多个商品','warning');
             return;
         }
-        cid_update=selects[0].cid;
-        //将选中行的学生信息赋值给商品修改对话框
-        $('#cid_up').val(selects[0].cid);
-        $('#cname_up').val(selects[0].cname);
-        $('#time_up').val(selects[0].time);
-        $('#location_up').val(selects[0].location);
-        $('#allNumber_up').val(selects[0].allNumber);
-        if (typeof(selects[0].teacherInfo)=="undefined"){
-            $('#tno_up').val('0');
+        sno_update=selects[0].sno;
+        //将选中行的请假信息信息赋值给商品修改对话框
+        $('#sno_up').val(selects[0].sno);
+        $('#sname_up').val(selects[0].sname);
+        $('#sex_up').val(selects[0].sex);
+        $('#phone_up').val(selects[0].phone);
+        $('#email_up').val(selects[0].email);
+        $('#address_up').val(selects[0].address);
+        $('#acquireStatus_up').val(selects[0].acquireStatus);
+        $('#checkStatus_up').val(selects[0].checkStatus);
+        $('#checkTime_up').val(selects[0].checkTime);
+
+        if (typeof(selects[0].dormInfo)=="undefined"){
+            $('#dorm_id_up').val('0');
         }else{
-            $('#tno_up').val(selects[0].teacherInfo.tno);
+            $('#dorm_id_up').val(selects[0].dormInfo.id);
         }
         $('#idcard_up').val(selects[0].idcard);
         $('#dep_id_up').val(selects[0].departmentInfo.id);
-        $('#updateCourse').modal('show');
+        $('#updateAskForLeave').modal('show');
     }
     function loadDepartmentType(url,idStr) {
         $.ajax({
@@ -591,7 +634,7 @@
             }
         });
     }
-    function loadTeacherId(url,idStr) {
+    function loadDormId(url,idStr) {
         $.ajax({
            url:url,
             dataType:'json',
@@ -600,8 +643,8 @@
             type:'post',
             success:function (data) {
                var options="<option value='0'>请选择</option>";
-               $.each(data.teacherInfoType, function (key,val) {
-                    options+='<option value='+val.tno+'>'+val.tname+'</option>';
+               $.each(data.DormId,function (key,val) {
+                    options+='<option value='+val.id+'>'+val.id+'</option>';
                });
                $('#'+idStr).empty();
                $('#'+idStr).append(options);
@@ -614,27 +657,15 @@
     function vform(dom,func) {
         $('#'+dom).validate({
            rules:{
-               cid:{
+               sno:{
                    required:true,
                    maxlength:30
                },
-               cname:{
+               sname:{
                    required:true,
                    maxlength:10
                },
-               time:{
-                   required:true,
-                   maxlength:30
-               },
-               location:{
-                   required:true,
-                   maxlength:20
-               },
-               allNumber:{
-                   required:true,
-                   maxlength:10
-               },
-               "teacherInfo.tno":{
+               sex:{
                    required:true
                },
                "dormInfo.id":{
@@ -642,27 +673,19 @@
                }
            },
             messages:{
-                cid:{
-                    required:'请输入课程编号',
+               sno:{
+                   required:'请输入学号',
+                   maxlength:'参数名过长'
+               },
+                sname:{
+                   required:'请输入姓名',
                     maxlength:'参数名过长'
                 },
-                cname:{
-                    required:'请输入课程名称',
-                    maxlength:'参数名过长'
-                },
-                time:{
-                    required:'请输入上课时间',
-                    maxlength:'参数名过长'
-                },
-                location:{
-                    required:'请输入上课地点',
-                    maxlength:'参数名过长'
-                },
-                "teacherInfo.tno":{
-                    required:'请选择授课老师'
+                sex:{
+                   required:'请输入性别'
                 },
                 "dormInfo.id":{
-                    required:'请选择院系'
+                   required:'请选择院系'
                 }
             },
             submitHandler:function () {

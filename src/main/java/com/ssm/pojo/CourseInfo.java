@@ -3,22 +3,23 @@ package com.ssm.pojo;
 import java.util.List;
 
 public class CourseInfo {
-    private String id;      //课程编号
+    private String cid;      //课程编号
     private String cname;    //课程名称
+    private String time;     //上课时间
     private String location;     //上课地点
+    private String allNumber;    //课程容量
     private TeacherInfo teacherInfo;  //教师信息
-    private int allNumber;    //课程容量
-    private List<StudentInfo> studentInfos;  //上课学生信息
+    private DepartmentInfo departmentInfo;  //院系编号(外键)
 
     public CourseInfo() {
     }
 
-    public String getId() {
-        return id;
+    public String getCid() {
+        return cid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
     public String getCname() {
@@ -27,6 +28,14 @@ public class CourseInfo {
 
     public void setCname(String cname) {
         this.cname = cname;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getLocation() {
@@ -45,31 +54,31 @@ public class CourseInfo {
         this.teacherInfo = teacherInfo;
     }
 
-    public int getAllNumber() {
+    public String getAllNumber() {
         return allNumber;
     }
 
-    public void setAllNumber(int allNumber) {
+    public void setAllNumber(String allNumber) {
         this.allNumber = allNumber;
     }
 
-    public List<StudentInfo> getStudentInfos() {
-        return studentInfos;
+    public DepartmentInfo getDepartmentInfo() {
+        return departmentInfo;
     }
 
-    public void setStudentInfos(List<StudentInfo> studentInfos) {
-        this.studentInfos = studentInfos;
+    public void setDepartmentInfo(DepartmentInfo departmentInfo) {
+        this.departmentInfo = departmentInfo;
     }
 
     @Override
     public String toString() {
         return "CourseInfo{" +
-                "id='" + id + '\'' +
+                "cid='" + cid + '\'' +
                 ", cname='" + cname + '\'' +
+                ", time='" + time + '\'' +
                 ", location='" + location + '\'' +
+                ", allNumber=" + allNumber+
                 ", teacherInfo=" + teacherInfo +
-                ", allNumber=" + allNumber +
-                ", studentInfos=" + studentInfos +
                 '}';
     }
 }

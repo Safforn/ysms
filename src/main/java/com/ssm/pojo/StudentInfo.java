@@ -13,7 +13,7 @@ public class StudentInfo {
     private String checkStatus; //是否报到
     private String checkTime;   //报到时间
 //    String dorm_id;     //宿舍分配编号(外键)
-   private DormInfo dormInfo;
+    private DormInfo dormInfo;
     private String idcard;      //身份证号
 //    int dep_id;         //院系编号(外键)
     private DepartmentInfo departmentInfo;

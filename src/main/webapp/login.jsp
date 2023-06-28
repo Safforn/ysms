@@ -68,8 +68,9 @@
             </div><br>
             <div style="position: absolute;width:237px; height: 40px; z-index: 3; top: 70%; left: 13%;">
                 <select class="form-control" style="color: #0a0a0a" id="identity">
-                    <option value="学生" style="color: #0a0a0a" selected>学生</option>
                     <option value="管理员" style="color: #0a0a0a">管理员</option>
+                    <option value="学生" style="color: #0a0a0a" selected>学生</option>
+                    <option value="老师" style="color: #0a0a0a" selected>老师</option>
                 </select>
             </div>
             <div style="position: absolute; width:237px; height: 40px; z-index: 3; top: 80%; left: 13%; ">
@@ -161,7 +162,9 @@
                    swal("系统提示","请求服务器失败","warning");
                }
            });
-        }else{
+        }
+        // 管理员登录
+        else{
             $.ajax({
                url:'/ysms/admin/login',
                method:'post',

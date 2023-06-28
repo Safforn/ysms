@@ -91,6 +91,28 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="fa fa-check"></i>
+                    <span class="nav-label">日常管理</span><span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="viewAnnouncement.jsp">查看公告</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="checkOnAttendance.jsp">考勤</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="askForLeave.jsp">请假</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="viewScore.jsp">查看成绩</a>
+                    </li>
+                </ul>
+            </li>
+
             <li>
                 <a href="javascript:void(0)">
                     <i class="fa fa-check"></i>
@@ -108,7 +130,7 @@
     </div>
 </nav>
 <!--左侧导航结束-->
-<!--右侧部分开始-->
+
 <!--右侧部分开始-->
 <div id="page-wrapper" class="gray-bg dashbard-1">
     <div class="row border-bottom">

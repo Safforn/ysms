@@ -38,7 +38,6 @@ public class DepartmentInfoController {
         Map<String,Object> result=new HashMap<>(2);
         result.put("count",count);
         result.put("DepartmentType",departmentInfos);
-
         return result;
     }
 

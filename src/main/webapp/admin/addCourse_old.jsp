@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>课程信息管理</title>
+    <title>课程信息录入</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link href="../commons/jslib/hplus/css/bootstrap.min.css"
           rel="stylesheet">
@@ -97,6 +97,7 @@
                     </div>
                     <label class="col-sm-1 control-label text-right">教师姓名</label>
                     <div class="col-sm-2">
+                        <%-- TODO: 页面上部搜索条件的输入框。需要新增教师实体类，name为教师编号id --%>
                         <select class="form-control" name="teacherInfo.tno" id="tno"><!--动态加载-->
                         </select>
                     </div>
@@ -133,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <%--学生列表展示--%>
+            <%--课程列表展示--%>
             <div class="ibox-content table-responsive">
                 <table id="table" class="table" data-click-to-select="true">
                 </table>
@@ -149,7 +150,7 @@
                             aria-hidden="true" onclick="clear_add()" id="btn_close_add">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="addCourseLabel">课程信息录入</h4>
+                    <h4 class="modal-title" id="addCourselable">课程信息录入</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -195,7 +196,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">院系</label>
                                 <div class="col-sm-8 controls">
-                                    <select class="form-control" id="dep_id_add" name="departmentInfo.id">
+                                    <%-- TODO: 新增弹窗的选择下拉框，需要修改name属性为 courseInfo.id --%>
+                                    <select class="form-control" id="dep_id_add" name="dormInfo.id">
                                     </select>
                                 </div>
                             </div>
@@ -211,7 +213,7 @@
         </div>
     </div>
     <!--修改-->
-    <div class="modal fade" id="updateCourse">
+    <div class="modal fade" id="updateStudent">
         <div class="modal-dialog" style="width:400px">
             <div class="modal-content">
                 <div class="modal-header">
@@ -219,7 +221,7 @@
                             aria-hidden="true" onclick="clear_add()" id="btn_close_up">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="updateCourseLabel">课程信息修改</h4>
+                    <h4 class="modal-title" id="updateStudentLabel">课程信息修改</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -227,52 +229,50 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">课程编号</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="cid" id="cid_up" readonly="true"/>
+                                    <input type="text" value="" class="form-control" name="cid"
+                                           id="cid_up" readonly="true"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="cname" id="cname_up"/>
+                                    <input type="text" value="" class="form-control" name="cname"
+                                           id="cname_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">上课时间</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="time" id="time_up"/>
+                                    <input type="text" value="" class="form-control" name="time"
+                                           id="time_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">上课地点</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="location" id="location_up"/>
+                                    <input type="text" value="" class="form-control" name="location"
+                                           id="location_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">课程容量</label>
                                 <div class="col-sm-8 controls">
-                                    <input type="text" value="" class="form-control"
-                                           name="allNumber" id="allNumber_up"/>
+                                    <input type="text" value="" class="form-control" name="allNumber"
+                                           id="allNumber_up"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">教师姓名</label>
                                 <div class="col-sm-8 controls">
                                     <%-- TODO: 修改弹窗的选择下拉框，需要修改name属性 --%>
-                                    <select class="form-control"
-                                            id="tno_up" name="teacherInfo.tno" readonly="true">
+                                    <select class="form-control" id="tno_up" name="teacherInfo.tno" readonly="true">
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">院系编号</label>
                                 <div class="col-sm-8 controls">
-                                    <select class="form-control"
-                                            id="dep_id_up" name="departmentInfo.id" readonly="true">
+                                    <select class="form-control" id="dep_id_up" name="dormInfo.id" readonly="true">
                                     </select>
                                 </div>
                             </div>
@@ -294,7 +294,8 @@
         //加载添加对话框界面院系下拉框
         loadDepartmentType("/ysms/department/getDepartment","dep_id_add");
         loadDepartmentType("/ysms/department/getDepartment","dep_id_up");
-        //加载根页面教室姓名的下拉框
+        //加载教师编号
+        <%-- TODO: 应该连接 teacherinfo的controller的getTno函数 --%>
         loadTeacherId("/ysms/teacher/getTno","tno");
         loadTeacherId("/ysms/teacher/getTno","tno_add");
         loadTeacherId('/ysms/teacher/getTno',"tno_up");
@@ -362,6 +363,7 @@
             },{
                 title:'教师姓名',
                 field:'teacherInfo',
+                valign:'middle',
                 formatter:function (value,row,index) {
                     if (row.teacherInfo){
                         return row.teacherInfo.tno;
@@ -409,21 +411,20 @@
             },
             success:function (data) {
                 if (data.success=='true'){
-                    $('#cid_add').val('');
-                    $('#cname_add').val('');
-                    $('#time_add').val('');
-                    $('#location_add').val('');
-                    $('#allNumber_add').val('');
-                    $('#tno_add').val('请选择')
-                    $('#dep_id_add').val('请选择');
-                    $('#addCourse').modal('hide');
-                    $('#table').bootstrapTable('refresh');
-                }else{
+                       $('#cid_add').val('');
+                       $('#cname_add').val('');
+                       $('#time_add').val('');
+                       $('#location_add').val('');
+                       $('#allNumber_add').val('');
+                       $('#tno_add').val('请选择')
+                       $('#dep_id_add').val('请选择');
+                       $('#addStudent').modal('hide');
+                       $('#table').bootstrapTable('refresh');
+                } else {
                     alert("添加失败!");
                 }
             }
         });
-
     }
     //删除
     function deleteCourse() {
@@ -484,6 +485,7 @@
             }
         });
     }
+
     function updateCourse() {
         //获取表单上面的值
         var cid=$('#cid_up').val();
@@ -493,7 +495,7 @@
         var allNumber=$('#allNumber_up').val();
         var tno=$('#tno_up option:selected').val();
         var dep_id=$('#dep_id_up option:selected').val();
-        // alert(sno+sname+sex+phone+email+address+acquireStatus+checkStatus+checkTime+dorm_id+idcard+dep_id);
+        alert("function updateCourse()");
         $.ajax({
             url:'/ysms/course/updateCourse',
             type:'post',
@@ -510,12 +512,13 @@
                 "departmentInfo.id":parseInt(dep_id)
             },
             success:function (data) {
-                if (data.success =='true' ){
+                if (data.success =='true'){
                     swal({
                         title:'系统提示',
                         text:'修改成功',
                         type:'success'
                     });
+
                     $('#cid_up').val('');
                     $('#cname_up').val('');
                     $('#time_up').val('');
@@ -523,27 +526,26 @@
                     $('#allNumber_up').val('');
                     $('#tno_up').val('请选择')
                     $('#dep_id_up').val('请选择');
-                    $('#updateCourse').modal('hide');
+                    $('#updateStudent').modal('hide');
                     $('#table').bootstrapTable('refresh');
                 }else{
-                    alert("updateCourse进入success，但后端返回值为false");
+
                 }
             }
         });
 
     }
-    // 清空按钮 点击事件函数
+
     function btn_clear() {
         $('#cid').val('');
         $('#cname').val('');
         $('#time').val('');
         $('#location').val('');
         $('#allNumber').val('');
-        $('#tno').val('0')
-        $('#dep_id').val('0');
+        $('#tno').val('')
+        $('#dep_id').val('');
     }
 
-    // 修改课程弹窗的预先设置值
     var cid_update='';
     function showUpdateModal() {
         var selects=$('#table').bootstrapTable('getSelections');
@@ -566,10 +568,9 @@
             $('#tno_up').val('0');
         }else{
             $('#tno_up').val(selects[0].teacherInfo.tno);
-        }
-        $('#idcard_up').val(selects[0].idcard);
+        }.teacherInfo.tno
         $('#dep_id_up').val(selects[0].departmentInfo.id);
-        $('#updateCourse').modal('show');
+        $('#updateStudent').modal('show');
     }
     function loadDepartmentType(url,idStr) {
         $.ajax({
@@ -591,18 +592,20 @@
             }
         });
     }
-    function loadTeacherId(url,idStr) {
+    function loadTeacherId(url, idStr) {
         $.ajax({
-           url:url,
+            url:url,
             dataType:'json',
             async:false,
             data:{},
             type:'post',
             success:function (data) {
                var options="<option value='0'>请选择</option>";
+               //alert("查看data\n"+data.teacherInfoType+"\n"+data.TeacherId);
                $.each(data.teacherInfoType, function (key,val) {
                     options+='<option value='+val.tno+'>'+val.tname+'</option>';
                });
+               //console.log("options: \n"+options)
                $('#'+idStr).empty();
                $('#'+idStr).append(options);
             },
@@ -662,7 +665,7 @@
                     required:'请选择授课老师'
                 },
                 "dormInfo.id":{
-                    required:'请选择院系'
+                   required:'请选择院系'
                 }
             },
             submitHandler:function () {
