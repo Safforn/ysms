@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/department")
-public class DepartmentInfoController {
+public class DepartmentInfoController602 {
 
     @Autowired
     DepartmentInfoService departmentInfoService;

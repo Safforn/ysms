@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/announce")
-public class AnnounceInfoController {
+public class AnnounceInfoController612 {
 
     @Autowired
     AnnounceService announceService;

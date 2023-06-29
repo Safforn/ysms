@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Peroy
-  Date: 2021/1/12
-  Time: 13:34
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -196,7 +190,7 @@
                 field:'teacherInfo',
                 formatter:function (value,row,index) {
                     if (row.teacherInfo){
-                        return row.teacherInfo.tno;
+                        return row.teacherInfo.tname;
                     }else{
                         return value;
                     }

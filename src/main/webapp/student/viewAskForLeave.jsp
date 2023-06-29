@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>查看考勤信息</title>
+    <title>查看请假信息</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link href="../commons/jslib/hplus/css/bootstrap.min.css"
           rel="stylesheet">
@@ -65,23 +65,27 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title" style="display:none;">
             <div class="row">
-                <label class="col-sm-1 control-label text-right">公告编号</label>
+                <label class="col-sm-1 control-label text-right">请假编号</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control input-sm" id="aid" name="aid" placeholder="公告编号"/>
+                    <input type="text" class="form-control input-sm" id="aid" name="aid" placeholder="请假编号"/>
                 </div>
-                <label class="col-sm-1 control-label text-right">公告标题</label>
+                <label class="col-sm-1 control-label text-right">学号</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control input-sm" id="title" name="title" placeholder="公告标题"/>
+                    <input type="text" class="form-control input-sm" id="sno" name="studentInfo.sno" placeholder="学号"/>
                 </div>
-                <label class="col-sm-1 control-label text-right">正文</label>
+                <label class="col-sm-1 control-label text-right">请假原因</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control input-sm" id="text" name="text" placeholder="正文"/>
+                    <input type="text" class="form-control input-sm" id="reason" name="reason" placeholder="请假原因"/>
                 </div>
             </div>
             <div class="row" style="display:none;">
-                <label class="col-sm-1 control-label text-right">考勤时间</label>
+                <label class="col-sm-1 control-label text-right">请假时间</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control input-sm" id="time" name="time" placeholder="考勤时间"/>
+                </div>
+                <label class="col-sm-1 control-label text-right">申请状态</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control input-sm" id="state" name="state" placeholder="申请状态"/>
                 </div>
             </div>
             <div class="row" id="toolbar" style="display:none;">
@@ -107,7 +111,7 @@
     $(function () {
         var $table=$('#table');
         $table.bootstrapTable({
-            url:'/ysms/announce/list',
+            url:'/ysms/askForLeave/list',
             toolbar:'#toolbar',
             dataType:'json',    //服务器返回的数据类型
             method:'post',      //请求方式
@@ -131,29 +135,40 @@
                     page:params.pageNumber,     //首页页码
                     rows:params.pageSize,       //每页的记录数
                     aid:$('#aid').val(),
-                    title:$('#title').val(),
-                    text:$('#text').val(),
+                    "studentInfo.sno":,
+                    reason:$('#reason').val(),
                     time:$('#time').val(),
+                    state:$('#state').val()
                 };
                 return param;
             },
             columns:[{
                 checkbox:true
             },{
-                title:'公告编号',
+                title:'请假编号',
                 field:'aid',
                 valign:'middle'
             },{
-                title:'公告标题',
-                field:'title',
+                title:'学号',
+                field:'studentInfo',
+                formatter:function (value,row,index) {
+                    if (row.studentInfo){
+                        return row.studentInfo.sname;
+                    }else{
+                        return value;
+                    }
+                }
+            },{
+                title:'请假原因',
+                field:'reason',
                 valign:'middle'
             },{
-                title:'公告正文',
-                field:'text',
-                valign:'middle'
-            },{
-                title:'发布时间',
+                title:'请假时间',
                 field:'time',
+                valign:'middle'
+            },{
+                title:'申请状态',
+                field:'state',
                 valign:'middle'
             }]
         });
@@ -164,9 +179,10 @@
 
     function btn_clear() {
         $('#aid').val('');
-        $('#title').val('');
-        $('#text').val('');
+        $('#sno').val('');
+        $('#reason').val('');
         $('#time').val('');
+        $('#state').val('');
     }
 
 </script>

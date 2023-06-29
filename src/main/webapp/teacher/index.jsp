@@ -103,8 +103,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem"
-                           href="viewAnnouncement.jsp">查看公告</a>
+                        <a class="J_menuItem" href="viewAnnouncement.jsp">查看公告</a>
                     </li>
                 </ul>
             </li>

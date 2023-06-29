@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/student")
-public class StudentInfoController {
+public class StudentInfoController630 {
     @Autowired
     StudentInfoService studentInfoService;
     @Autowired

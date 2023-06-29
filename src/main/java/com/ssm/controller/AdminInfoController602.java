@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminInfoController {
+public class AdminInfoController602 {
 
     @Autowired
     AdminService adminService;

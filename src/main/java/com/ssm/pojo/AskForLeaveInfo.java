@@ -2,17 +2,17 @@ package com.ssm.pojo;
 
 public class AskForLeaveInfo {
     private String aid;
-    private String sno;
+    private StudentInfo studentInfo;
     private String reason;
     private String time;
     private String state;
 
-    public String getSno() {
-        return sno;
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
     }
 
-    public void setSno(String sno) {
-        this.sno = sno;
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.studentInfo = studentInfo;
     }
 
     public String getReason() {
@@ -50,9 +50,9 @@ public class AskForLeaveInfo {
 
     @Override
     public String toString() {
-        return "AnnounceInfo{" +
+        return "AskForLeaveInfo{" +
                 "aid='" + aid + '\'' +
-                ", sno='" + sno + '\'' +
+                ", studentInfo='" + studentInfo + '\'' +
                 ", reason='" + reason + '\'' +
                 ", time='" + time + '\'' +
                 ", state='" + state + '\'' +

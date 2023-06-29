@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Peroy
-  Date: 2021/1/12
-  Time: 13:34
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -158,6 +151,7 @@
             }]
         });
     });
+    // 隐藏了按钮，搜索和清空不用
     function search() {
         $('#table').bootstrapTable('refresh');
     }

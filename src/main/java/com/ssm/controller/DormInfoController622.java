@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/dorm")
-public class DormInfoController {
+public class DormInfoController622 {
     @Autowired
     DormInfoService dormInfoService;
 

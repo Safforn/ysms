@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/attendance")
-public class AttendanceInfoController {
+public class AttendanceInfoController612 {
 
     @Autowired
     AttendanceService attendanceService;

@@ -191,7 +191,7 @@
 <%--            </li>--%>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">课程管理622</span><span class="fa arrow"></span>
+                        class="nav-label">课程管理</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -202,7 +202,7 @@
             </li>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">公告管理612</span><span class="fa arrow"></span>
+                        class="nav-label">公告管理</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -217,7 +217,7 @@
             </li>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
-                        class="nav-label">个人账户管理602</span><span class="fa arrow"></span>
+                        class="nav-label">个人账户管理</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -226,21 +226,20 @@
                     </li>
                 </ul>
             </li>
-<%--            可以新增加的功能：图表统计  --%>
-<%--            <li>--%>
-<%--                <a href="#">--%>
-<%--                    <i class="fa fa-check"></i>--%>
-<%--                    <span class="nav-label">信息统计</span><span class="fa arrow"></span>--%>
-<%--                </a>--%>
-<%--                <ul class="nav nav-second-level">--%>
-<%--                    <li>--%>
-<%--                        <a class="J_menuItem" href="dormStatistic.jsp">宿舍信息统计</a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a class="J_menuItem" href="studentStatistic.jsp">学院信息统计</a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </li>--%>
+            <li>
+                <a href="#">
+                    <i class="fa fa-check"></i>
+                    <span class="nav-label">信息统计</span><span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="dormStatistic.jsp">宿舍信息统计</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="studentStatistic.jsp">学院信息统计</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>

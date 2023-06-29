@@ -108,6 +108,9 @@
                         <a class="J_menuItem" href="askForLeave.jsp">请假</a>
                     </li>
                     <li>
+                        <a class="J_menuItem" href="viewAskForLeave.jsp">查看请假申请</a>
+                    </li>
+                    <li>
                         <a class="J_menuItem" href="viewCourseScore.jsp">查看成绩</a>
                     </li>
                     <li>
@@ -187,11 +190,7 @@
                 src="index_homePage.jsp" frameborder="0"
                 data-id="index_homePage.jsp" seamless></iframe>
     </div>
-    <div class="footer">
-        <div class="pull-right">
-            <font color="black">&copy; xiongtete</font>
-        </div>
-    </div>
+
 </div>
 <!--右侧部分结束-->
 <!-- 修改密码窗口 -->

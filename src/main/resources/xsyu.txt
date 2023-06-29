@@ -1,0 +1,371 @@
+CREATE DATABASE  IF NOT EXISTS `xsyu` /*!40100 DEFAULT CHARACTER SET utf8mb4  */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `xsyu`;
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: xsyu
+-- ------------------------------------------------------
+-- Server version	8.0.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin` (
+  `id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '管理员账号',
+  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '管理员密码',
+  `adminName` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '管理员姓名',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES ('2222','2222','李四'),('admin','123456','admin');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `announcement`
+--
+
+DROP TABLE IF EXISTS `announcement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `announcement` (
+  `aid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '公告编号',
+  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '公告标题',
+  `text` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '公告正文',
+  `time` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '公告时间',
+  PRIMARY KEY (`aid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `announcement`
+--
+
+LOCK TABLES `announcement` WRITE;
+/*!40000 ALTER TABLE `announcement` DISABLE KEYS */;
+INSERT INTO `announcement` VALUES ('20230629104836','明天放假','学校通知：明天放假，后天开学！','2023-06-29-10:48:36'),('20230629105108','12月四六级考试报名通知','6月份没考过的同学可以开始备战12月四六级了！','2023-06-29-10:51:08');
+/*!40000 ALTER TABLE `announcement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ask_for_leave`
+--
+
+DROP TABLE IF EXISTS `ask_for_leave`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ask_for_leave` (
+  `aid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请假编号',
+  `sno` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学号',
+  `reason` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请假原因',
+  `time` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请假时间',
+  `state` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '审批状态',
+  PRIMARY KEY (`aid`) USING BTREE,
+  KEY `fk_ask_for_leave_sno` (`sno`) USING BTREE,
+  CONSTRAINT `fk_ask_for_leave_sno` FOREIGN KEY (`sno`) REFERENCES `student` (`sno`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ask_for_leave`
+--
+
+LOCK TABLES `ask_for_leave` WRITE;
+/*!40000 ALTER TABLE `ask_for_leave` DISABLE KEYS */;
+INSERT INTO `ask_for_leave` VALUES ('20230629114434','111','6666','6666','待审批');
+/*!40000 ALTER TABLE `ask_for_leave` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `attendance` (
+  `aid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '考勤编号',
+  `sno` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '考勤人学号',
+  `cname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程名称',
+  `time` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '考勤时间',
+  PRIMARY KEY (`aid`) USING BTREE,
+  KEY `fk_attend_sno` (`sno`) USING BTREE,
+  CONSTRAINT `fk_attend_sno` FOREIGN KEY (`sno`) REFERENCES `student` (`sno`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendance`
+--
+
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+INSERT INTO `attendance` VALUES ('20230629090941','111','计算机系统235','2023-06-29-09:09:41');
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `buliding`
+--
+
+DROP TABLE IF EXISTS `buliding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `buliding` (
+  `id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '楼号',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `buliding`
+--
+
+LOCK TABLES `buliding` WRITE;
+/*!40000 ALTER TABLE `buliding` DISABLE KEYS */;
+INSERT INTO `buliding` VALUES ('1'),('2'),('3'),('4'),('5'),('6');
+/*!40000 ALTER TABLE `buliding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `course`
+--
+
+DROP TABLE IF EXISTS `course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `course` (
+  `cid` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程编号',
+  `cname` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '课程名称',
+  `time` varchar(30) DEFAULT NULL,
+  `location` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '上课地点',
+  `allNumber` varchar(10) DEFAULT '0' COMMENT '课程容量',
+  `tno` varchar(30) DEFAULT NULL COMMENT '教师编号(外键)',
+  `dep_id` int DEFAULT NULL COMMENT '院系编号(外键)',
+  PRIMARY KEY (`cid`) USING BTREE,
+  KEY `fk_course_tno` (`tno`) USING BTREE,
+  KEY `fk_course_dep_id` (`dep_id`) USING BTREE,
+  CONSTRAINT `fk_course_dep_id` FOREIGN KEY (`dep_id`) REFERENCES `department` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_course_tno` FOREIGN KEY (`tno`) REFERENCES `teacher` (`tno`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `course`
+--
+
+LOCK TABLES `course` WRITE;
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+INSERT INTO `course` VALUES ('CS00001','大学计算机基础','2-14周 周一第3,4节','1号楼101教室','200','1',1),('CS00002','C语言','2-14周 周三第3,4节','1号楼102教室','100','2',1),('EE00001','电子技术基础','2-14周 周二第1,2节','2号楼101教室','200','1',2),('EE00002','工图基础','2-14周 周四第1,2节','2号楼102教室','100','2',2),('ME00001','机械基础','2-14周 周三第5,6节','3号楼101教室','200','3',3),('ME00002','工图基础','2-14周 周五第5,6节','3号楼103教室','100','3',3);
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coursescore`
+--
+
+DROP TABLE IF EXISTS `coursescore`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `coursescore` (
+  `sid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '成绩编号',
+  `sno` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学号',
+  `cid` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程编号',
+  `credit` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学分',
+  `score` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '成绩',
+  PRIMARY KEY (`sid`) USING BTREE,
+  KEY `fk_course_score_sno` (`sno`) USING BTREE,
+  KEY `fk_course_score_cid` (`cid`) USING BTREE,
+  CONSTRAINT `fk_course_score_cid` FOREIGN KEY (`cid`) REFERENCES `course` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_course_score_sno` FOREIGN KEY (`sno`) REFERENCES `student` (`sno`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coursescore`
+--
+
+LOCK TABLES `coursescore` WRITE;
+/*!40000 ALTER TABLE `coursescore` DISABLE KEYS */;
+INSERT INTO `coursescore` VALUES ('CJ00001','111','CS00001','4','81'),('CJ00002','111','CS00002','3','82'),('CJ00003','111','EE00001','3','83'),('CJ00004','111','EE00002','4','84'),('CJ00005','111','ME00001','3','85'),('CJ00006','111','ME00002','4','86'),('CJ00007','112','CS00001','4','9'),('CJ00008','113','CS00001','4','100');
+/*!40000 ALTER TABLE `coursescore` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `department`
+--
+
+DROP TABLE IF EXISTS `department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `department` (
+  `id` int NOT NULL COMMENT '院系编号',
+  `dep_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '院系名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `department`
+--
+
+LOCK TABLES `department` WRITE;
+/*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES (1,'计算机学院'),(2,'电子工程学院'),(3,'机械工程学院'),(4,'经济管理学院'),(5,'体育学院');
+/*!40000 ALTER TABLE `department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dorm`
+--
+
+DROP TABLE IF EXISTS `dorm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dorm` (
+  `id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '宿舍分配编号',
+  `alreadyNumber` int DEFAULT NULL COMMENT '已住人数',
+  `allNumber` int DEFAULT NULL COMMENT '可住人数',
+  `status` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否住满',
+  `sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '男生/女生宿舍',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dorm`
+--
+
+LOCK TABLES `dorm` WRITE;
+/*!40000 ALTER TABLE `dorm` DISABLE KEYS */;
+INSERT INTO `dorm` VALUES ('1-101',4,4,'是','男'),('1-102',3,4,'否','男'),('1-103',2,4,'否','男'),('1-104',1,4,'否','男'),('1-105',1,4,'否','男'),('1-201',2,4,'否','男'),('1-202',1,4,'否','男'),('1-203',1,4,'否','男'),('1-204',1,4,'否','男'),('1-205',1,4,'否','男'),('1-301',1,4,'否','男'),('1-302',1,4,'否','男'),('1-303',1,4,'否','男'),('1-304',1,4,'否','男'),('1-305',1,4,'否','男'),('1-401',1,4,'否','男'),('1-402',1,4,'否','男'),('1-403',1,4,'否','男'),('1-404',1,4,'否','男'),('1-405',1,4,'否','男'),('2-101',1,4,'否','女'),('2-102',2,4,'否','女'),('2-103',1,4,'否','女'),('2-104',1,4,'否','女'),('2-105',1,4,'否','女'),('2-201',1,4,'否','女'),('2-202',1,4,'否','女'),('2-203',1,4,'否','女'),('2-204',1,4,'否','女'),('2-205',1,4,'否','女'),('2-301',1,4,'否','女'),('2-302',1,4,'否','女'),('2-303',1,4,'否','女'),('2-304',1,4,'否','女'),('2-305',1,4,'否','女'),('2-401',1,4,'否','女'),('2-402',1,4,'否','女'),('2-403',1,4,'否','女'),('2-404',1,4,'否','女'),('2-405',1,4,'否','女'),('3-101',0,4,'否','男'),('3-102',0,4,'否','男'),('3-103',0,4,'否','男'),('3-104',0,4,'否','男'),('3-105',0,4,'否','男'),('3-201',0,4,'否','男'),('3-202',0,4,'否','男'),('3-203',0,4,'否','男'),('3-204',0,4,'否','男'),('3-205',0,4,'否','男'),('3-301',0,4,'否','男'),('3-302',0,4,'否','男'),('3-303',0,4,'否','男'),('3-304',0,4,'否','男'),('3-305',0,4,'否','男'),('3-401',0,4,'否','男'),('3-402',0,4,'否','男'),('3-403',0,4,'否','男'),('3-404',0,4,'否','男'),('3-405',0,4,'否','男'),('4-101',0,4,'否','女'),('4-102',0,4,'否','女'),('4-103',0,4,'否','女'),('4-104',0,4,'否','女'),('4-105',0,4,'否','女'),('4-201',0,4,'否','女'),('4-202',0,4,'否','女'),('4-203',0,4,'否','女'),('4-204',0,4,'否','女'),('4-205',0,4,'否','女'),('4-301',0,4,'否','女'),('4-302',0,4,'否','女'),('4-303',0,4,'否','女'),('4-304',0,4,'否','女'),('4-305',0,4,'否','女'),('4-401',0,4,'否','女'),('4-402',0,4,'否','女'),('4-403',0,4,'否','女'),('4-404',0,4,'否','女'),('4-405',1,4,'否','女');
+/*!40000 ALTER TABLE `dorm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dormdetail`
+--
+
+DROP TABLE IF EXISTS `dormdetail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dormdetail` (
+  `id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '宿舍号',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dormdetail`
+--
+
+LOCK TABLES `dormdetail` WRITE;
+/*!40000 ALTER TABLE `dormdetail` DISABLE KEYS */;
+INSERT INTO `dormdetail` VALUES ('101'),('102'),('103'),('104'),('105'),('201'),('202'),('203'),('204'),('205'),('301'),('302'),('303'),('304'),('305'),('401'),('402'),('403'),('404'),('405');
+/*!40000 ALTER TABLE `dormdetail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `student` (
+  `sno` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学号',
+  `sname` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '姓名',
+  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码',
+  `sex` enum('男','女') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '性别',
+  `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '手机号',
+  `email` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '邮箱',
+  `address` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '住址',
+  `acquireStatus` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '未领取' COMMENT '是否领取物品',
+  `checkStatus` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '未报到' COMMENT '是否报到',
+  `checkTime` date DEFAULT NULL COMMENT '报到时间',
+  `dorm_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '宿舍分配编号(外键)',
+  `idcard` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '身份证',
+  `dep_id` int DEFAULT NULL COMMENT '院系编号(外键)',
+  PRIMARY KEY (`sno`) USING BTREE,
+  KEY `fk_student_dep_id` (`dep_id`) USING BTREE,
+  KEY `fk_student_dorm_id` (`dorm_id`) USING BTREE,
+  CONSTRAINT `fk_student_dep_id` FOREIGN KEY (`dep_id`) REFERENCES `department` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_student_dorm_id` FOREIGN KEY (`dorm_id`) REFERENCES `dorm` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `student`
+--
+
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES ('1001','K','111','女','18243373783','aabbbcc@foxmail.com','饭都花园','已领取','已报到','2023-06-28',NULL,NULL,1),('1002','领用人J','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('111','张三','111','女','1111111','2222111','3333111','已领取','已报到','2021-01-18','4-405','12321111112',2),('1111','1111','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-201',NULL,2),('112','李四','111','男','2222','3333','4444','已领取','已报到','2021-01-13','1-102','1212121111',2),('113','张三1','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-103',NULL,3),('114','王喵喵','111','女','13425678965','1241220456@qq.com','陕西省西安市雁塔区','已领取','已报到','2021-01-18',NULL,'1212121111',1),('116','张四','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-101','121212121212',1),('117','郝敏杰','111','女',NULL,NULL,NULL,'已领取','已报到','2021-01-18','2-101','121212111167',1),('118','康瀚钰','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-102',NULL,2),('119','王兰英','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-103',NULL,3),('120','彭云妮','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-104',NULL,4),('121','刘恒恒','111','女',NULL,NULL,NULL,'未领取','已报到','2021-01-18','2-105',NULL,5),('122','朱淼淼','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-201',NULL,1),('123','王成龙','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-202',NULL,2),('124','杨怡婷','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-203',NULL,3),('125','闫晶','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-204',NULL,4),('126','段盈娜','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-205',NULL,5),('127','吴梦洁','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-301',NULL,1),('128','蒋佳磊','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-302',NULL,2),('129','潘松','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-303',NULL,3),('130','汪义丽','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-304',NULL,4),('131','王佳勇','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-305',NULL,5),('132','罗涛','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-401',NULL,1),('133','张豪','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-402',NULL,2),('134','张旭','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-403',NULL,3),('135','顾超','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-404',NULL,4),('136','杨佩佩','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-405',NULL,5),('137','聂浩','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('138','张瑞照','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('139','王高伟','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('140','毛智','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('141','江建霖','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('142','翟喜桐','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('143','鲁攀','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('144','王晨晨','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,'2-102',NULL,3),('145','梁淑玲','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('146','唐彩玲','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('147','高雯轩','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('148','王若琦','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('149','余佳豪','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('150','张曼曼','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('151','闫慕云','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('152','王颖','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('153','李文华','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('154','方莹','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('155','王炳衡','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('156','任文玉','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('157','杨欣','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('158','王归建','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('159','李辰君','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('160','张建伟','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('161','高冰钰','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('162','张建军','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('163','沈立','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('164','刘庚','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('165','王艺霏','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('166','常赛','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('167','何秀琴','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('168','冯雪','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('169','景雪萌','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('170','解港华','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('171','李奕欣','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('172','张璞','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('173','张凯','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-102',NULL,2),('174','许晓倩','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('175','孙莉莉','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('176','宋玟萱','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('177','曹嘉宁','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('178','赵小强','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('179','肖昌雷','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('180','张歌吟','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('181','王鑫鑫','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('182','史沛灵','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('183','李爽','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('184','康悦','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('185','王昊昊','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('186','张明鑫','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('187','李睿','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-101',NULL,1),('188','李轩','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('189','魏玉龙','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('190','曹晋菲','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('191','刘佳琦','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('192','黄义龙','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('193','王敬尧','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('194','陈宇航','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('195','殷于茼','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('196','王艺姗','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('197','张晨玮','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('198','肖盟','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('199','张悦康','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('200','同少华','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('201','任竞','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('202','赵慧','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('203','刘书君','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('204','张博荣','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('205','王齐升','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('206','张苗','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('207','毕帅','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('208','李梦茹','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('209','刘文豪','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('210','黄鹏飞','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('211','白海浪','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('212','秦雪楠','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('213','王阳','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('214','胡镇','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('215','贾经烽','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('216','韦启鹏','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('217','李昕阳','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-101',NULL,1),('218','廖志强','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('219','焦怡彤','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('220','许虎','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('221','赵磊','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('222','陆泽坤','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('223','韩佳驰','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('224','边旭','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('225','陈泓竹','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('226','宁立鑫','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('227','车泽平','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('228','周思懿','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('229','梁智','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('230','刘永瑜','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('231','杨佳栋','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('232','闫梦园','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('233','雷嘉豪','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('234','季海信','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('235','张渊博','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('236','马晗','111','女',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('237','强怡','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-101',NULL,1),('238','任萍萍','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-102',NULL,2),('239','张沛林','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-103',NULL,3),('240','王凯','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-104',NULL,4),('241','范文琛','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-105',NULL,5),('242','王嘉旭','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-201',NULL,1),('243','樊迪','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-202',NULL,2),('244','朱远航','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-203',NULL,3),('245','刘晓钰','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-204',NULL,4),('246','张杰航','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-205',NULL,5),('247','刘庆玲','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-301',NULL,1),('248','赵鑫','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-302',NULL,2),('249','袁宏伟','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-303',NULL,3),('250','张笑凡','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-304',NULL,4),('251','唐雪茹','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-305',NULL,5),('252','张博文','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-401',NULL,1),('253','王力辉','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-402',NULL,2),('254','党鑫','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-403',NULL,3),('255','李飞','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-404',NULL,4),('256','刘冲','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,'1-405',NULL,5),('257','沈昭','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('258','徐浩','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('259','魏继平','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('260','赵敬贤','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('261','周文静','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('262','李思浩','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('263','冯梅','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('264','石成','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('265','蒲杰','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('266','刘逢源','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('267','郭辉','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('268','李虎','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('269','丁漪澜','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('270','任运奇','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('271','宋成洋','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('272','吕亚强','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('273','宋俊','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('274','赵瑞','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('275','麦麦提艾力','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('276','孟佳乐','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('277','景紫正','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1),('278','王佩琦','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,2),('279','朱航','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,3),('280','尹鹏','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,4),('281','陈浩','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,5),('282','鲜星宇','111','男',NULL,NULL,NULL,'未领取','未报到',NULL,NULL,NULL,1);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `teacher`
+--
+
+DROP TABLE IF EXISTS `teacher`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `teacher` (
+  `tno` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学号',
+  `tname` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '姓名',
+  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '000' COMMENT '密码',
+  `sex` enum('男','女') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '性别',
+  `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '手机号',
+  `email` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '邮箱',
+  `address` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '住址',
+  `idcard` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '身份证',
+  PRIMARY KEY (`tno`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teacher`
+--
+
+LOCK TABLES `teacher` WRITE;
+/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` VALUES ('1','张一老师','000','男','101','101@qq.com','101办公室','12345101'),('2','张二老师','000','女','102','102@qq.com','102办公室','1234102'),('3','张三老师','000','男','103','103@qq.com','103办公室','12345103');
+/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'xsyu'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-29 12:48:50

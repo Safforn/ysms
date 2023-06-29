@@ -196,7 +196,7 @@
                 field:'teacherInfo',
                 formatter:function (value,row,index) {
                     if (row.teacherInfo){
-                        return row.teacherInfo.tno;
+                        return row.teacherInfo.tname;
                     }else{
                         return value;
                     }

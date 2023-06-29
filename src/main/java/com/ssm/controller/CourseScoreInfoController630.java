@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/courseScore")
-public class CourseScoreInfoController {
+public class CourseScoreInfoController630 {
     @Autowired
     CourseScoreInfoService courseScoreInfoService;
     @Autowired
