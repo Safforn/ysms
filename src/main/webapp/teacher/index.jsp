@@ -110,6 +110,17 @@
             </li>
             <li>
                 <a href="#"> <i class="fa fa-check"></i> <span
+                        class="nav-label">考勤管理</span><span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem"
+                           href="viewCheckOnAttendance.jsp">查看考勤</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-check"></i> <span
                         class="nav-label">个人账户管理</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">

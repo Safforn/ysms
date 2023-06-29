@@ -43,6 +43,19 @@ public class StudentInfoController {
         }
     }
 
+    @RequestMapping(value = "/getSession",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getSession(HttpServletRequest req){
+//        System.out.println(studentInfo);
+        StudentInfo studentInfo;
+        if(req.getSession() != null){
+            studentInfo = (StudentInfo) req.getSession().getAttribute("STUDENT");
+            return studentInfo.getSno();
+        }else{
+            return null;
+        }
+    }
+
     //分页显示学生列表
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody

@@ -2,6 +2,7 @@ package com.ssm.pojo;
 
 public class AttendanceInfo {
     private String aid;
+    private StudentInfo studentInfo;
     private String cname;
     private String time;
 
@@ -11,6 +12,14 @@ public class AttendanceInfo {
 
     public void setAid(String aid) {
         this.aid = aid;
+    }
+
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
+    }
+
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.studentInfo = studentInfo;
     }
 
     public String getCname() {
@@ -33,6 +42,7 @@ public class AttendanceInfo {
     public String toString() {
         return "AttendanceInfo{" +
                 "aid='" + aid + '\'' +
+                ", studentInfo='" + studentInfo + '\'' +
                 ", cname='" + cname + '\'' +
                 ", time='" + time + '\'' +
                 '}';
