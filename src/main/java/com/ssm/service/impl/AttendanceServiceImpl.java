@@ -1,12 +1,8 @@
 package com.ssm.service.impl;
 
-import com.ssm.dao.AnnounceInfoDao;
 import com.ssm.dao.AttendanceInfoDao;
-import com.ssm.pojo.AnnounceInfo;
 import com.ssm.pojo.AttendanceInfo;
-import com.ssm.pojo.CourseScoreInfo;
 import com.ssm.pojo.Pager;
-import com.ssm.service.AnnounceService;
 import com.ssm.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +27,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public int count(Map<String, Object> params) {
-        int ret = attendanceInfoDao.count(params);
-        System.out.println("___________________"+ret);
-        return ret;
+        return attendanceInfoDao.count(params);
     }
 
     @Override

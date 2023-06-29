@@ -75,7 +75,7 @@
                     </div>
                     <div class="ibox-content">
                         <form method="post" class="form-horizontal" id="updateform">
-                           <div class="form-group">
+                            <div class="form-group">
                                <label class="col-sm-3 control-label">公告编号:</label>
                                <div class="col-sm-8">
                                    <input type="text" class="form-control" value="${ANNOUNCEMENT.aid}" readonly="true"
@@ -88,11 +88,15 @@
                                     <input type="text" class="form-control" value="${ANNOUNCEMENT.title}"
                                     id="title" name="title"/>
                                 </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">公告正文:</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" value="${ANNOUNCEMENT.text}"
                                            id="text" name="text"/>
                                 </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label">公告时间:</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" value="${ANNOUNCEMENT.time}" readonly="true"
@@ -114,8 +118,18 @@
 <script type="text/javascript">
     function checkAnnouncement() {
         var now = new Date();
-        var time = now.getFullYear() + "-" +((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
-        var aid=$('#aid').val();
+        var time = now.getFullYear() + "-" +
+            ((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+
+            (now.getDate()<10?"0":"")+now.getDate()+"-"+
+            (now.getHours()<10?"0":"")+now.getHours()+":"+
+            (now.getMinutes()<10?"0":"")+now.getMinutes()+":"+
+            (now.getSeconds()<10?"0":"")+now.getSeconds();
+        var aid=now.getFullYear() +
+            ((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+
+            (now.getDate()<10?"0":"")+now.getDate()+
+            (now.getHours()<10?"0":"")+now.getHours()+
+            (now.getMinutes()<10?"0":"")+now.getMinutes()+
+            (now.getSeconds()<10?"0":"")+now.getSeconds();
         var title=$('#title').val();
         var text=$('#text').val();
         $.ajax({
@@ -131,10 +145,11 @@
             },
             dataType:'json',
             success:function (data) {
-               if (data.success=='true'){
+               if (data.message=='true'){
                    swal({
                        title:'系统提示',
-                       text:'发布成功',
+                       text:'发布成功\n公告编号：'+aid+'\n标题：'+title+
+                           '\n正文:\n'+text+'\n发布时间:'+time,
                        icon:'success',
                        confirmButtonColor:'#DD6B55',
                        confirmButtonText:'确定'

@@ -125,17 +125,6 @@
             (now.getSeconds()<10?"0":"")+now.getSeconds();
         var sno = ${STUDENT.sno};
         var sname = ${STUDENT.sname};
-        // $.ajax({
-        //     url:'/ysms/student/getSession',
-        //     type:'post',
-        //     async:false,
-        //     cache:false,
-        //     data:{},
-        //     dataType:'json',
-        //     success:function (data) {
-        //         console.log("data="+data);
-        //     }
-        // });
         var cname=$('#cname').val();
 
 

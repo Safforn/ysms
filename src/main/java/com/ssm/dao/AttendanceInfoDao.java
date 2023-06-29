@@ -24,7 +24,7 @@ public interface AttendanceInfoDao {
     @Insert("insert into attendance(aid,sno,cname,time) values(#{aid},#{studentInfo.sno},#{cname},#{time})")
     int addAttendance(AttendanceInfo attendanceInfo);
 
-    //分页获取成绩列表
+    //分页获取考勤列表
     @Results({@Result(id = true,column = "aid",property = "aid"),
             @Result(column = "sno",property = "studentInfo",
                     one=@One(select = "com.ssm.dao.StudentInfoDao.selectById", fetchType = FetchType.EAGER)),
